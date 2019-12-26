@@ -9,22 +9,22 @@ class App extends Component {
       {
         id: 1,
         title: 'Make the cake', 
-        todoStatus: false
+        isFinished: false
       },
       {
         id: 2,
         title: 'Throw out the garbage', 
-        todoStatus: false
+        isFinished: false
       },
       {
         id: 3,
         title: 'Feed the kitty', 
-        todoStatus: false
+        isFinished: true
       },
       {
         id: 4,
         title: 'Draw some stars on the sky', 
-        todoStatus: false
+        isFinished: false
       },
     ]
   }
