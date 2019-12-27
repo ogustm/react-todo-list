@@ -29,8 +29,14 @@ class App extends Component {
     ]
   }
 
+  //Toggle isFinished
   markComplete = (id) => {
-    console.log(id)
+    this.setState({ todos: this.state.todos.map(todo => {
+      if (todo.id === id) {
+          todo.isFinished = !todo.isFinished
+      }
+      return todo;
+    })  });
   }
 
   render() {
