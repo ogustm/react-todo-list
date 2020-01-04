@@ -4,41 +4,28 @@ import Header from './components/layout/Header';
 import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
 import About from './components/pages/About';
-import uuid from 'uuid';
+// import uuid from 'uuid';
+import axios from 'axios';
 import './App.css';
 
 class App extends Component {
 
   state = {
-    todos: [
-      {
-        id: uuid.v4(),
-        title: 'Make the cake', 
-        isFinished: false
-      },
-      {
-        id: uuid.v4(),
-        title: 'Throw out the garbage', 
-        isFinished: false
-      },
-      {
-        id: uuid.v4(),
-        title: 'Feed the kitty', 
-        isFinished: false
-      },
-      {
-        id: uuid.v4(),
-        title: 'Draw some stars on the sky', 
-        isFinished: false
-      },
-    ]
+    todos: []
   }
 
-  //Toggle every item isFinished
+//Lifecycle method
+
+  componentDidMount() {
+    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=8')
+      .then(res => this.setState({ todos: res.data }))
+  }
+
+  //Toggle every item completed
   markComplete = (id) => {
     this.setState({ todos: this.state.todos.map(todo => {
       if (todo.id === id) {
-          todo.isFinished = !todo.isFinished
+          todo.completed = !todo.completed
       }
       return todo;
     })  });
@@ -47,22 +34,24 @@ class App extends Component {
   // delete todo
 
   removeTodo = (id) => {
-    this.setState(
-      { todos: [...this.state.todos.filter(todo => todo.id !== id)]}
-    )
+    axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+      .then(res => this.setState({ todos: [...this.state.todos.filter(todo => todo.id != id)]}))
+    
+    
   }
 
   // Add todo
 
   addTodo = (title) => {
 
-    const newTodo = {
-      id: uuid.v4(),
-      title: title,
-      isFinished: false
-    }
+    axios.post('https://jsonplaceholder.typicode.com/todos', {
+      
+      title,
+      completed: false
 
-    this.setState({ todos: [...this.state.todos, newTodo]})
+    })
+      .then(res => this.setState({ todos:
+       [...this.state.todos, res.data] }));    
   }
 
   render() {
