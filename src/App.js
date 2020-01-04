@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
-import Header from './components/layout/header';
+import Header from './components/layout/Header';
 import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
 import About from './components/pages/About';
@@ -72,7 +72,7 @@ class App extends Component {
         <div className="App">
           <div className="container">
             <Header />
-            <Route path="/" render= {props => (
+            <Route exact path="/" render= {props => (
               <React.Fragment>
                 <AddTodo addTodo = {this.addTodo}/>
                 <Todos todos={this.state.todos} markComplete = 
