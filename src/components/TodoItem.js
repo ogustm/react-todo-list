@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import Proptypes from 'prop-types';
+
+
 class TodoItem extends Component {
     getStyle = () => {
         return {
@@ -26,9 +28,14 @@ class TodoItem extends Component {
     }
 }
 
+//Proptypes
 TodoItem.propTypes = {
-    todo: Proptypes.object.isRequired
+    todo: Proptypes.object.isRequired,    
+    markComplete: Proptypes.func.isRequired,
+    removeTodo: Proptypes.func.isRequired
 }
+
+
 
 const btnStyle = {
     background: '#ff0000',
